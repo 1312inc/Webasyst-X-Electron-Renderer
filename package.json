@@ -1,6 +1,6 @@
 {
-  "name": "electron-wrapper",
-  "version": "0.1.0",
+  "name": "webasyst-x-electron-renderer",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

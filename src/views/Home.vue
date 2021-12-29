@@ -4,7 +4,7 @@
       <div class="h-full flex flex-col justify-between text-white">
         <div class="flex flex-col gap-4">
           <installation-component
-            v-for="installation in installations.filter(i => i.accessToken)"
+            v-for="installation in installations.filter((i) => i.accessToken)"
             :key="installation.id"
             :data="installation"
             @click="installationOnClick(installation)"
@@ -25,9 +25,9 @@
 
 <script lang="ts">
 import axios from 'axios'
-import { watch, defineComponent, onBeforeMount, ref } from 'vue'
+import { watch, defineComponent, ref } from 'vue'
 import InstallationComponent from '@/components/Installation.vue'
-import { Installation } from '@/types/models'
+import { Installation, InstallationInfo } from '@/types/models'
 
 export default defineComponent({
   components: {
@@ -35,18 +35,28 @@ export default defineComponent({
   },
 
   setup () {
-    const user = ref(JSON.parse((window as any).localStorage.getItem('WAID_user')) || null)
-    const installations = ref<Array<Installation>>(JSON.parse((window as any).localStorage.getItem('WAID_installations')) || [])
-
-    console.log(JSON.parse((window as any).localStorage.getItem('WAID_installations')))
+    const user = ref(
+      JSON.parse((window as any).localStorage.getItem('WAID_user')) || null
+    )
+    const installations = ref<Array<Installation>>(
+      JSON.parse((window as any).localStorage.getItem('WAID_installations')) ||
+        []
+    )
 
     watch(user, (val: any) => {
       (window as any).localStorage.setItem('WAID_user', JSON.stringify(val))
     })
 
-    watch(installations, (val: Installation[]) => {
-      (window as any).localStorage.setItem('WAID_installations', JSON.stringify(val))
-    }, { deep: true })
+    watch(
+      installations,
+      (val: Installation[]) => {
+        (window as any).localStorage.setItem(
+          'WAID_installations',
+          JSON.stringify(val)
+        )
+      },
+      { deep: true }
+    )
 
     const logout = () => {
       if ((window as any).appState.logout) {
@@ -55,16 +65,27 @@ export default defineComponent({
     }
 
     const installationOnClick = (installation: Installation) => {
-      (window as any).appState.openAppInView(JSON.parse(JSON.stringify(installation)))
-    }
+      const name = (
+        JSON.parse(
+          (window as any).localStorage.getItem(
+            `installation_${installation.id}`
+          )
+        ) as InstallationInfo
+      ).name;
+      (window as any).appState.openAppInView(
+        JSON.parse(JSON.stringify({ ...installation, name } as Installation))
+      )
+    };
 
-    onBeforeMount(async () => {
+    (async () => {
       const token: string = await (window as any).appState.token()
       const http = axios.create({
         headers: { Authorization: `Bearer ${token}` }
       })
 
-      const { data } = await http.get('https://www.webasyst.com/id/api/v1/profile/')
+      const { data } = await http.get(
+        'https://www.webasyst.com/id/api/v1/profile/'
+      )
       user.value = data
 
       http
@@ -73,9 +94,10 @@ export default defineComponent({
           installations.value = res.data.map((e: Installation) => {
             return {
               ...e,
-              ...installations.value.find(i => i.id === e.id)
+              ...installations.value.find((i) => i.id === e.id)
             }
           })
+
           const ids = installations.value.map((e: Installation) => e.id)
 
           http
@@ -87,7 +109,7 @@ export default defineComponent({
                 const options = new URLSearchParams({
                   code: res.data[installation.id],
                   scope: 'cash,webasyst',
-                  client_id: process.env.VUE_APP_NAME
+                  client_id: 'WebasystDesktopApp'
                 }).toString()
                 axios
                   .post(`${installation.url}/api.php/token-headless`, options)
@@ -97,7 +119,7 @@ export default defineComponent({
               }
             })
         })
-    })
+    })()
 
     return {
       user,
@@ -106,6 +128,5 @@ export default defineComponent({
       installationOnClick
     }
   }
-
 })
 </script>

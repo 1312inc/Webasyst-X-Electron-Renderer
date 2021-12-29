@@ -21,14 +21,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref, watch } from 'vue'
-import { Installation } from '@/types/models'
+import { defineComponent, PropType, ref, watch } from 'vue'
+import { Installation, InstallationInfo } from '@/types/models'
 import axios from 'axios'
-
-type InstallationInfo = {
-  logo: any;
-  name: string;
-};
 
 export default defineComponent({
   props: {
@@ -37,6 +32,7 @@ export default defineComponent({
       required: true
     }
   },
+
   setup (props) {
     const installationInfo = ref<InstallationInfo | null>(
       JSON.parse(
@@ -55,18 +51,18 @@ export default defineComponent({
       {
         deep: true
       }
-    )
+    );
 
-    onMounted(async () => {
+    (async () => {
       const { data } = await axios.get(
-            `${props.data.url}/api.php/webasyst.getInfo`,
-            {
-              headers: { Authorization: `Bearer ${props.data.accessToken}` }
-            }
+        `${props.data.url}/api.php/webasyst.getInfo`,
+        {
+          headers: { Authorization: `Bearer ${props.data.accessToken}` }
+        }
       )
 
       installationInfo.value = data
-    })
+    })()
 
     return {
       installationInfo
