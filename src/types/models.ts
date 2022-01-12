@@ -9,5 +9,6 @@ export interface Installation {
   id: string;
   url: string;
   accessToken: string;
+  last_use_datetime?: number;
   logo: any;
 }

@@ -10,7 +10,7 @@
       />
       <div v-else class="w-12 h-12 rounded-full bg-gray-200"></div>
     </div>
-    <div class="px-2 h-3">
+    <div class="px-2 h-3 text-center">
       <div v-if="data" class="truncate text-xs">
         {{ data.name }}
       </div>

@@ -8,3 +8,15 @@
 button {
     @apply bg-blue-700 text-white px-4 py-2 rounded-md hover:opacity-80;
 }
+
+.list-item {
+  transition: all .3s;
+}
+.list-enter, .list-leave-to
+/* .list-complete-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-leave-active {
+  position: absolute;
+}

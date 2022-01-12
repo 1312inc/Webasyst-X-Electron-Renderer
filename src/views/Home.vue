@@ -4,15 +4,16 @@
       <div class="w-20 bg-green pt-8 pb-4">
         <div class="h-full flex flex-col justify-between text-white">
           <div class="flex flex-col gap-4">
-            <installation-component
-              v-for="installation in sortedInstallations.filter(
-                (i) => i.accessToken
-              )"
-              :key="installation.id"
-              :data="installation"
-              @click="installationOnClick(installation)"
-              :selected="selectedId === installation.id"
-            />
+            <transition-group name="list">
+              <installation-component
+                v-for="(installation, i) in sortedInstallations"
+                :key="installation.id"
+                :data="installation"
+                @click="installationOnClick(installation)"
+                :selected="i === 0"
+                class="list-item"
+              />
+            </transition-group>
           </div>
           <div v-if="user" class="flex flex-col gap-2">
             <div class="flex justify-center">
@@ -52,23 +53,20 @@ export default defineComponent({
       JSON.parse((window as any).localStorage.getItem('WAID_installations')) ||
         []
     )
-    const selectedId = ref(
-      (window as any).localStorage.getItem('installation_selected') || ''
-    )
     const showInstallAppComponent = ref(false)
 
     const sortedInstallations = computed(() => {
-      if (selectedId.value) {
-        const temp = [...installations.value]
-        temp.unshift(
-          temp.splice(
-            temp.findIndex((i: Installation) => i.id === selectedId.value),
-            1
-          )[0]
-        )
-        return temp
-      }
       return installations.value
+        .filter((i) => i.accessToken)
+        .sort((a, b) => {
+          if ((a.last_use_datetime || 0) > (b.last_use_datetime || 0)) {
+            return -1
+          }
+          if ((a.last_use_datetime || 0) < (b.last_use_datetime || 0)) {
+            return 1
+          }
+          return 0
+        })
     })
 
     watch(user, (val: any) => {
@@ -86,10 +84,6 @@ export default defineComponent({
       { deep: true }
     )
 
-    watch(selectedId, (val: string) => {
-      (window as any).localStorage.setItem('installation_selected', val)
-    })
-
     const logout = () => {
       if ((window as any).appState.logout) {
         (window as any).appState.logout()
@@ -100,7 +94,7 @@ export default defineComponent({
       (window as any).appState.openAppInView(
         JSON.parse(JSON.stringify(installation))
       )
-      selectedId.value = installation.id
+      installation.last_use_datetime = new Date().getTime()
     };
 
     (async () => {
@@ -173,20 +167,10 @@ export default defineComponent({
       await Promise.all(promises)
 
       // open default Installation
-      if (selectedId.value) {
-        const instn = installations.value.find(
-          (i: Installation) => i.id === selectedId.value
-        )
-        if (instn) {
-          installationOnClick(instn)
-          return
-        }
-      }
-      installationOnClick(installations.value[0])
+      installationOnClick(sortedInstallations.value[0])
     })()
 
     return {
-      selectedId,
       user,
       sortedInstallations,
       logout,
