@@ -6,12 +6,8 @@ export interface Installation {
   cloud_expire_date?: string;
   name: string;
   domain: string;
-  id: number;
+  id: string;
   url: string;
   accessToken: string;
-}
-
-export interface InstallationInfo {
   logo: any;
-  name: string;
 }
