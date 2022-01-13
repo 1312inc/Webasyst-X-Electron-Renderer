@@ -2,8 +2,9 @@
   <div class="flex w-full">
     <div class="w-20 flex h-screen">
       <div class="w-20 bg-green pt-8 pb-4">
-        <div class="h-full flex flex-col justify-between text-white">
-          <div class="flex flex-col gap-4">
+        <div class="h-full flex flex-col space-y-4 text-white">
+          <div class="h-4"></div>
+          <div class="flex flex-grow overflow-y-auto flex-col gap-4">
             <transition-group name="list">
               <installation-component
                 v-for="(installation, i) in sortedInstallations"
@@ -26,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div style="flex-grow: 1">
+    <div class="flex-grow">
       <install-app v-if="showInstallAppComponent"></install-app>
     </div>
   </div>
@@ -180,3 +181,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped lang="scss">
+.overflow-y-auto {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+</style>
