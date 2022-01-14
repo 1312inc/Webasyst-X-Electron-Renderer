@@ -4,7 +4,7 @@
       <div class="w-20 bg-green pt-8 pb-4">
         <div class="h-full flex flex-col space-y-4 text-white">
           <div class="h-4"></div>
-          <div class="flex flex-grow overflow-y-auto flex-col gap-4">
+          <div class="flex flex-grow overflow-y-auto flex-col space-y-4 pt-1">
             <transition-group name="list">
               <installation-component
                 v-for="(installation, i) in sortedInstallations"
@@ -16,7 +16,7 @@
               />
             </transition-group>
           </div>
-          <div v-if="user" class="flex flex-col gap-2">
+          <div v-if="user" class="flex flex-col space-y-2">
             <div class="flex justify-center">
               <img :src="user.userpic" class="w-12 rounded-full" />
             </div>
