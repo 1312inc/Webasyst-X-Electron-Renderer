@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+      
+      - name: Deploy Renderer 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          token: ${{ secrets.TOKEN }}
+          folder: dist # The folder the action should deploy.
+          repository-name: 1312inc/Webasyst-X-Electron
+          branch: master # The branch the action should deploy to.
+          target-folder: renderer
+          
