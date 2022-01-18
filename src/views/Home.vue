@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full">
     <div class="w-20 flex h-screen">
-      <div class="w-20 bg-green pt-8 pb-4">
+      <div class="w-20 bg-green dark:bg-greenDark pt-4 pb-4">
         <div class="h-full flex flex-col space-y-4 text-white">
           <div class="h-4"></div>
           <div class="flex flex-grow overflow-y-auto flex-col space-y-4 pt-1">
@@ -18,10 +18,12 @@
           </div>
           <div v-if="user" class="flex flex-col space-y-2">
             <div class="flex justify-center">
-              <img :src="user.userpic" class="w-12 rounded-full" />
+              <img :src="user.userpic" class="w-10 rounded-full" />
             </div>
-            <div class="flex justify-center">
-              <a href="#" @click.prevent="logout" class="text-xs">Logout</a>
+            <div class="flex justify-center opacity-60">
+              <a href="#" @click.prevent="logout" class="text-xs">{{
+                $t("logout")
+              }}</a>
             </div>
           </div>
         </div>
@@ -85,11 +87,7 @@ export default defineComponent({
       { deep: true }
     )
 
-    const logout = () => {
-      if ((window as any).appState.logout) {
-        (window as any).appState.logout()
-      }
-    }
+    const logout = (window as any).appState.logout
 
     const installationOnClick = (installation: Installation) => {
       (window as any).appState.openAppInView(
@@ -146,20 +144,24 @@ export default defineComponent({
         }).toString()
         promises.push(
           (async () => {
-            const { data: token } = await axios.post(
-              `${v.url}/api.php/token-headless`,
-              options
-            )
-            const { data: info } = await axios.get(
-              `${v.url}/api.php/webasyst.getInfo`,
-              {
-                headers: { Authorization: `Bearer ${token.access_token}` }
+            try {
+              const { data: token } = await axios.post(
+                `${v.url}/api.php/token-headless`,
+                options
+              )
+              const { data: info } = await axios.get(
+                `${v.url}/api.php/webasyst.getInfo`,
+                {
+                  headers: { Authorization: `Bearer ${token.access_token}` }
+                }
+              )
+              installations.value[i] = {
+                ...installations.value[i],
+                accessToken: token.access_token,
+                ...info
               }
-            )
-            installations.value[i] = {
-              ...installations.value[i],
-              accessToken: token.access_token,
-              ...info
+            } catch {
+              installations.value.splice(i, 1)
             }
           })()
         )

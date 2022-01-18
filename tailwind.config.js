@@ -1,10 +1,12 @@
 module.exports = {
   purge: ['./public/**/*.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        green: '#1d582f'
+        black: '#131223',
+        green: '#569F73',
+        greenDark: '#173B23'
       }
     }
   },
