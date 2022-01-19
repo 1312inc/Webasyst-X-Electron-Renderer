@@ -167,7 +167,7 @@ export default defineComponent({
         )
       }
 
-      await Promise.all(promises)
+      await Promise.allSettled(promises)
 
       // open default Installation
       installationOnClick(sortedInstallations.value[0])
