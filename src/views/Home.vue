@@ -144,24 +144,20 @@ export default defineComponent({
         }).toString()
         promises.push(
           (async () => {
-            try {
-              const { data: token } = await axios.post(
-                `${v.url}/api.php/token-headless`,
-                options
-              )
-              const { data: info } = await axios.get(
-                `${v.url}/api.php/webasyst.getInfo`,
-                {
-                  headers: { Authorization: `Bearer ${token.access_token}` }
-                }
-              )
-              installations.value[i] = {
-                ...installations.value[i],
-                accessToken: token.access_token,
-                ...info
+            const { data: token } = await axios.post(
+              `${v.url}/api.php/token-headless`,
+              options
+            )
+            const { data: info } = await axios.get(
+              `${v.url}/api.php/webasyst.getInfo`,
+              {
+                headers: { Authorization: `Bearer ${token.access_token}` }
               }
-            } catch {
-              installations.value.splice(i, 1)
+            )
+            installations.value[i] = {
+              ...installations.value[i],
+              accessToken: token.access_token,
+              ...info
             }
           })()
         )
