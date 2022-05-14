@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="flex-grow">
-      <install-app v-if="showInstallAppComponent"></install-app>
+      <component v-if="showStub" :is="stubComponentName" :installation="activeInstallation"></component>
     </div>
   </div>
 </template>
@@ -39,13 +39,15 @@
 import axios from 'axios'
 import { watch, defineComponent, ref, computed } from 'vue'
 import InstallationComponent from '@/components/Installation.vue'
-import InstallApp from '@/components/InstallApp.vue'
+import CreateCloud from '@/components/CreateCloud.vue'
 import { Installation } from '@/types/models'
+import InstallCashApp from '@/components/InstallCashApp.vue'
 
 export default defineComponent({
   components: {
     InstallationComponent,
-    InstallApp
+    CreateCloud,
+    InstallCashApp
   },
 
   setup () {
@@ -56,7 +58,9 @@ export default defineComponent({
       JSON.parse((window as any).localStorage.getItem('WAID_installations')) ||
         []
     )
-    const showInstallAppComponent = ref(false)
+    const showStub = ref(false)
+    const stubComponentName = ref('')
+    const activeInstallation = ref<Installation | null>(null)
 
     const sortedInstallations = computed(() => {
       return installations.value
@@ -89,11 +93,26 @@ export default defineComponent({
 
     const logout = (window as any).appState.logout
 
-    const installationOnClick = (installation: Installation) => {
+    const installationOnClick = async (installation: Installation) => {
+      activeInstallation.value = installation
+      try {
+        const http = axios.create({
+          headers: { Authorization: `Bearer ${installation.accessToken}` }
+        })
+        await http.get(`${installation.url}/api.php/cash.account.getList`)
+      } catch (error) {
+        if (error.response.data.error === 'app_not_installed') {
+          showStub.value = true
+          stubComponentName.value = 'InstallCashApp'
+          return
+        }
+      }
+
       (window as any).appState.openAppInView(
         JSON.parse(JSON.stringify(installation))
       )
       installation.last_use_datetime = new Date().getTime()
+      document.title = installation.name
     };
 
     (async () => {
@@ -122,7 +141,8 @@ export default defineComponent({
 
       // if No Installations
       if (!installations.value.length) {
-        showInstallAppComponent.value = true
+        showStub.value = true
+        stubComponentName.value = 'CreateCloud'
         return
       }
 
@@ -139,7 +159,7 @@ export default defineComponent({
       for (const [i, v] of installations.value.entries()) {
         const options = new URLSearchParams({
           code: authCodes[v.id],
-          scope: 'cash,webasyst',
+          scope: 'cash,webasyst,installer',
           client_id: 'WebasystDesktopApp'
         }).toString()
         promises.push(
@@ -173,8 +193,10 @@ export default defineComponent({
       user,
       sortedInstallations,
       logout,
-      showInstallAppComponent,
-      installationOnClick
+      showStub,
+      installationOnClick,
+      stubComponentName,
+      activeInstallation
     }
   }
 })
