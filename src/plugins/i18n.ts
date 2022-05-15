@@ -2,7 +2,7 @@ import { createI18n } from 'vue-i18n'
 
 const messages = {
   en: {
-    appName: 'Cash Flow',
+    appName: 'Webasyst Cash Flow',
     signInButton: 'Sign in with Webasyst ID',
     signInMessage: 'Manage your business cash flow wisely. Know how much money you’ll have on your business account tomorrow, in a week, in a month, and a year. Avoid cash gaps. Forecast the financial future of your business.',
     logout: 'Log out',
@@ -27,7 +27,7 @@ const messages = {
     }
   },
   ru: {
-    appName: 'Деньги',
+    appName: 'Webasyst Деньги',
     signInButton: 'Войти с Webasyst ID',
     signInMessage: 'Знайте с точностью до рубля, сколько денег будет на счете через месяц, через полгода, через год. Прогнозируйте финансовое будущее бизнеса. Избегайте кассовых разрывов.',
     logout: 'Выйти',
