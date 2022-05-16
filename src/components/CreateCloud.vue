@@ -2,6 +2,7 @@
   <div class="w-full h-screen flex flex-col space-y-8 justify-center">
     <div class="text-center">
       <img src="cash.png" alt="" class="w-24 mx-auto mb-4" />
+      <div class="text-3xl mb-4 font-medium">{{ $t("cloud.title") }}</div>
       <div class="max-w-sm text-sm mx-auto opacity-50">
         {{ $t("cloud.desc") }}
       </div>

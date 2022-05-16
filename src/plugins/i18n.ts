@@ -8,6 +8,7 @@ const messages = {
     signInMessage: 'Manage your business cash flow wisely. Know how much money you’ll have on your business account tomorrow, in a week, in a month, and a year. Avoid cash gaps. Forecast the financial future of your business.',
     logout: 'Log out',
     cloud: {
+      title: 'New Webasyst account',
       button: 'Create Webasyst Account',
       desc: 'A new Webasyst Cloud account will be automatically created with Cash, Team, Installer and other awesome apps pre-installed. This will be an account for your entire team.'
     },
@@ -33,6 +34,7 @@ const messages = {
     signInMessage: 'Знайте с точностью до рубля, сколько денег будет на счете через месяц, через полгода, через год. Прогнозируйте финансовое будущее бизнеса. Избегайте кассовых разрывов.',
     logout: 'Выйти',
     cloud: {
+      title: 'Новый аккаунт Webasyst',
       button: 'Создать аккаунт Webasyst',
       desc: 'В облаке Webasyst будет развернут новый аккаунт с предустановленными приложениями «Деньги», «Команда», «Инсталлер». Вы сможете приглашать своих коллег в этот аккаунт для совместной работы.'
     },
