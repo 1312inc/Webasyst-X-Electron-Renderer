@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" type="button">
+  <button :class="classes" :disabled="disabled" type="button">
     <svg
       v-if="loading"
       class="motion-reduce:hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -27,19 +27,30 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs } from 'vue'
+import { computed, defineProps, toRefs } from 'vue'
 
 const props = defineProps<{
   disabled?: boolean;
   loading?: boolean;
+  outlined?: boolean;
   text: string;
 }>()
 
-const { disabled, loading, text } = toRefs(props)
+const { disabled, loading, outlined, text } = toRefs(props)
+
+const classes = computed(() => {
+  return {
+    outlined: outlined?.value
+  }
+})
 </script>
 
 <style lang="scss" scoped>
 button {
   @apply inline-flex items-center font-semibold leading-6 text-sm bg-blue-600 text-white px-6 py-2 rounded-xl transition-opacity hover:opacity-80;
+
+  &.outlined {
+    @apply bg-white text-gray-700 border-2;
+  }
 }
 </style>

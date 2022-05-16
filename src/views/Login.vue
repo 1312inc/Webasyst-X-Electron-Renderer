@@ -12,6 +12,7 @@
       <button-component
         @click.prevent="useAppState.login"
         :text="$t('signInButton')"
+        :outlined="true"
       >
         <img src="webasystIcon.svg" alt="" class="w-6 mr-3" />
       </button-component>
