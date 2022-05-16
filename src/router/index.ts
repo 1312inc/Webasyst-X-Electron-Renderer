@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { useAppState } from '@/composables/appState'
 import Home from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -25,7 +26,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    const token = await (window as any).appState.token()
+    const token = await useAppState.token()
 
     if (token) {
       next()

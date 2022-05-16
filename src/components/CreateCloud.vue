@@ -24,6 +24,7 @@
 import { ref } from 'vue'
 import { http } from '../composables/http'
 import ButtonComponent from './Button.vue'
+import { useAppState } from '../composables/appState'
 
 const loading = ref(false)
 const errorMessage = ref('')
@@ -36,8 +37,9 @@ const open = async () => {
     await http().post('https://www.webasyst.com/id/api/v1/cloud/signup/', {
       bundle: 'cashflow',
       plan_id: 'X-1312-CASHFLOW-1'
-    });
-    (window as any).appState.reload()
+    })
+
+    useAppState.reload()
   } catch (error) {
     loading.value = false
     errorMessage.value = error.response.data.error

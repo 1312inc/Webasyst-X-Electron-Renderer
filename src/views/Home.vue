@@ -21,7 +21,7 @@
               <img :src="user.userpic" class="w-10 rounded-full" />
             </div>
             <div class="flex justify-center opacity-60">
-              <a href="#" @click.prevent="logout" class="text-xs">{{
+              <a href="#" @click.prevent="useAppState.logout" class="text-xs">{{
                 $t("logout")
               }}</a>
             </div>
@@ -42,6 +42,7 @@ import InstallationComponent from '@/components/Installation.vue'
 import CreateCloud from '@/components/CreateCloud.vue'
 import { Installation } from '@/types/models'
 import InstallCashApp from '@/components/InstallCashApp.vue'
+import { useAppState } from '@/composables/appState'
 
 export default defineComponent({
   components: {
@@ -91,8 +92,6 @@ export default defineComponent({
       { deep: true }
     )
 
-    const logout = (window as any).appState.logout
-
     const installationOnClick = async (installation: Installation) => {
       activeInstallation.value = installation
       try {
@@ -108,7 +107,7 @@ export default defineComponent({
         }
       }
 
-      (window as any).appState.openAppInView(
+      useAppState.openAppInView(
         JSON.parse(JSON.stringify(installation))
       )
       installation.last_use_datetime = new Date().getTime()
@@ -116,7 +115,7 @@ export default defineComponent({
     };
 
     (async () => {
-      const token: string = await (window as any).appState.token()
+      const token: string = await useAppState.token()
       const http = axios.create({
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -192,11 +191,11 @@ export default defineComponent({
     return {
       user,
       sortedInstallations,
-      logout,
       showStub,
       installationOnClick,
       stubComponentName,
-      activeInstallation
+      activeInstallation,
+      useAppState
     }
   }
 })

@@ -9,7 +9,7 @@
       ></div>
     </div>
     <div class="flex justify-center">
-      <button-component @click.prevent="login" :text="$t('signInButton')">
+      <button-component @click.prevent="useAppState.login" :text="$t('signInButton')">
           <img src="webasystIcon.svg" alt="" class="w-6 mr-3" />
       </button-component>
     </div>
@@ -23,7 +23,5 @@
 
 <script setup lang="ts">
 import ButtonComponent from '@/components/Button.vue'
-const login = () => {
-  (window as any).appState.login()
-}
+import { useAppState } from '@/composables/appState'
 </script>

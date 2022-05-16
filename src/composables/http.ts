@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+import { useAppState } from './appState'
 
 interface Http {
   post: (url: string, data: Record<string, unknown>) => Promise<AxiosResponse>
@@ -7,7 +8,7 @@ interface Http {
 const http = (initialToken?: string): Http => ({
 
   async post (url, data) {
-    const token = initialToken || await (window as any).appState.token()
+    const token = initialToken || await useAppState.token()
 
     const formData = new FormData()
     for (const key in data) {

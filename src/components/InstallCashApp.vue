@@ -56,6 +56,7 @@ import { Installation } from '../types/models'
 import Userpic from './Userpic.vue'
 import ButtonComponent from './Button.vue'
 import { http } from '../composables/http'
+import { useAppState } from '../composables/appState'
 
 const props = defineProps<{
   installation?: Installation;
@@ -74,9 +75,9 @@ const install = async () => {
       {
         slug: 'cash'
       }
-    );
+    )
 
-    (window as any).appState.reload()
+    useAppState.reload()
   } catch (error) {
     loading.value = false
     errorStatus.value = error.response.status
