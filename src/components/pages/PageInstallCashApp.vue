@@ -33,6 +33,7 @@
         <button-component
           @click.prevent="install"
           :loading="loading"
+          :loadingText="$t('installCashApp.loading')"
           :disabled="loading"
           :text="$t('installCashApp.button')"
         />

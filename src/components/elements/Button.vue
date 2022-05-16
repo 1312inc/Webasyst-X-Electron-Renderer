@@ -22,7 +22,7 @@
       ></path>
     </svg>
     <slot></slot>
-    {{ loading ? $t("loading") : text }}
+    {{ loading ? (loadingText || $t("loading")) : text }}
   </button>
 </template>
 
@@ -32,11 +32,12 @@ import { computed, defineProps, toRefs } from 'vue'
 const props = defineProps<{
   disabled?: boolean;
   loading?: boolean;
+  loadingText?: string;
   outlined?: boolean;
   text: string;
 }>()
 
-const { disabled, loading, outlined, text } = toRefs(props)
+const { disabled, loading, loadingText, outlined, text } = toRefs(props)
 
 const classes = computed(() => {
   return {

@@ -11,6 +11,7 @@
       <button-component
         @click.prevent="open"
         :loading="loading"
+        :loadingText="$t('cloud.loading')"
         :disabled="loading"
         :text="$t('cloud.button')"
       />
