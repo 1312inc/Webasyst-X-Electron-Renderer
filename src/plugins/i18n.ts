@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n'
+import { useAppState } from '@/composables/appState'
 
 const messages = {
   en: {
@@ -54,8 +55,8 @@ const messages = {
 }
 
 const i18n = createI18n({
-  locale: 'ru',
-  fallbackLocale: 'ru',
+  locale: navigator.language.split('-')[0],
+  fallbackLocale: 'en',
   messages
 })
 
