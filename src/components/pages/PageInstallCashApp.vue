@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen flex flex-col space-y-12 justify-center">
+  <div v-if="installation" class="w-full h-screen flex flex-col space-y-12 justify-center">
     <div class="flex justify-center">
       <div class="text-2xl text-center font-bold">
         {{ $t("installCashApp.title") }}<br />
@@ -51,36 +51,47 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
-import { Installation } from '../types/models'
-import Userpic from './Userpic.vue'
-import ButtonComponent from './Button.vue'
-import { http } from '../composables/http'
-import { useAppState } from '../composables/appState'
+import axios from 'axios'
+import { onBeforeMount, ref } from 'vue'
+import Userpic from '@/components/elements/Userpic.vue'
+import ButtonComponent from '@/components/elements/Button.vue'
+import { http } from '@/composables/http'
+import { useAppState } from '@/composables/appState'
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+import { Installation } from '@/types/models'
 
-const props = defineProps<{
-  installation?: Installation;
-}>()
-
+const route = useRoute()
+const store = useStore()
 const loading = ref(false)
-const errorStatus = ref<number | null>(null)
+const errorStatus = ref<number | undefined>(undefined)
+const installation = ref<Installation | undefined>(undefined)
 
 const install = async () => {
-  try {
-    loading.value = true
-    errorStatus.value = null
+  if (installation.value) {
+    try {
+      loading.value = true
+      errorStatus.value = undefined
 
-    await http(props.installation.accessToken).post(
-      `${props.installation.url}/api.php/installer.product.install`,
+      await http(installation.value.accessToken).post(
+      `${installation.value.url}/api.php/installer.product.install`,
       {
         slug: 'cash'
       }
-    )
+      )
 
-    useAppState.reload()
-  } catch (error) {
-    loading.value = false
-    errorStatus.value = error.response.status
+      useAppState.reload()
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        loading.value = false
+        errorStatus.value = error.response?.status
+      }
+    }
   }
 }
+
+onBeforeMount(() => {
+  installation.value = store.getters.installationById(route.params.id)
+})
+
 </script>

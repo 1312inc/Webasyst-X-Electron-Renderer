@@ -35,6 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import ButtonComponent from '@/components/Button.vue'
+import ButtonComponent from '@/components/elements/Button.vue'
 import { useAppState } from '@/composables/appState'
 </script>

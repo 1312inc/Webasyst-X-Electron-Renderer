@@ -12,7 +12,6 @@
     >
       <div
         v-if="props.installation.logo.text"
-        class="text-xs"
         :style="{ color: props.installation.logo.text.color }"
       >
         <span>{{ props.installation.logo.text.formatted_value }}</span>
@@ -38,10 +37,10 @@ const classes = {
 
 <style lang="scss">
 .userpic {
-  @apply w-10 h-10 rounded-full flex justify-center overflow-hidden mx-auto;
+  @apply w-10 h-10 rounded-full flex justify-center overflow-hidden mx-auto text-xs;
 
   &--large {
-      @apply w-24 h-24;
+      @apply w-24 h-24 text-2xl;
   }
 }
 </style>

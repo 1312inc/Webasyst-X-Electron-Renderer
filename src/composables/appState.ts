@@ -25,6 +25,10 @@ const useAppState = {
 
   openAppInView (installation: Installation): void {
     appState.openAppInView(installation)
+  },
+
+  removeAppInView (): void {
+    appState.removeAppInView()
   }
 }
 

@@ -1,6 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { useAppState } from '@/composables/appState'
 import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import PageCreateCloud from '../components/pages/PageCreateCloud.vue'
+import PageInstallation from '../components/pages/PageInstallation.vue'
+import PageInstallCashApp from '../components/pages/PageInstallCashApp.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,13 +13,29 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
     meta: {
       requiresAuth: true
-    }
+    },
+    children: [
+      {
+        path: 'installation/:id',
+        name: 'Installation',
+        component: PageInstallation
+      },
+      {
+        path: 'cloud',
+        name: 'Cloud',
+        component: PageCreateCloud
+      },
+      {
+        path: 'installApp',
+        name: 'InstallApp',
+        component: PageInstallCashApp
+      }
+    ]
   },
   {
     path: '/login',
     name: 'Login',
-    component: () =>
-      import(/* webpackChunkName: "login" */ '../views/Login.vue')
+    component: Login
   }
 ]
 
@@ -25,6 +45,8 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  useAppState.removeAppInView()
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const token = await useAppState.token()
 

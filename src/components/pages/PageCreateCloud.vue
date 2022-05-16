@@ -22,10 +22,11 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import { ref } from 'vue'
-import { http } from '../composables/http'
-import ButtonComponent from './Button.vue'
-import { useAppState } from '../composables/appState'
+import { http } from '@/composables/http'
+import ButtonComponent from '@/components/elements/Button.vue'
+import { useAppState } from '@/composables/appState'
 
 const loading = ref(false)
 const errorMessage = ref('')
@@ -42,8 +43,10 @@ const open = async () => {
 
     useAppState.reload()
   } catch (error) {
-    loading.value = false
-    errorMessage.value = error.response.data.error
+    if (axios.isAxiosError(error)) {
+      loading.value = false
+      errorMessage.value = error.response?.data.error
+    }
   }
 }
 </script>
