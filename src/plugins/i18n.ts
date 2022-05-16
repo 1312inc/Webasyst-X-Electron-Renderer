@@ -10,7 +10,8 @@ const messages = {
     cloud: {
       title: 'New Webasyst account',
       button: 'Create Webasyst Account',
-      desc: 'A new Webasyst Cloud account will be automatically created with Cash, Team, Installer and other awesome apps pre-installed. This will be an account for your entire team.'
+      desc: 'A new Webasyst Cloud account will be automatically created with Cash, Team, Installer and other awesome apps pre-installed. This will be an account for your entire team.',
+      notAllow: 'Sorry, we cannot create another account for you at the moment. Most likely, a limit on the number of free Webasyst cloud accounts has been exceeded.'
     },
     installCashApp: {
       title: 'Install Cash Flow on',
@@ -36,7 +37,8 @@ const messages = {
     cloud: {
       title: 'Новый аккаунт Webasyst',
       button: 'Создать аккаунт Webasyst',
-      desc: 'В облаке Webasyst будет развернут новый аккаунт с предустановленными приложениями «Деньги», «Команда», «Инсталлер». Вы сможете приглашать своих коллег в этот аккаунт для совместной работы.'
+      desc: 'В облаке Webasyst будет развернут новый аккаунт с предустановленными приложениями «Деньги», «Команда», «Инсталлер». Вы сможете приглашать своих коллег в этот аккаунт для совместной работы.',
+      notAllow: 'Не удалось создать аккаунт Webasyst. Скорее всего, превышен лимит на количество бесплатных облачных аккаунтов.'
     },
     installCashApp: {
       title: 'Установить «Деньги» на',

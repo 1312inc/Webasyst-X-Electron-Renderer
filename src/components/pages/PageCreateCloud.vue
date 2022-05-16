@@ -15,7 +15,7 @@
         :text="$t('cloud.button')"
       />
     </div>
-    <div v-if="errorMessage" class="text-center">
+    <div v-if="errorMessage" class="text-center text-red-500 max-w-md mx-auto">
       {{ errorMessage }}
     </div>
   </div>
@@ -27,7 +27,9 @@ import { ref } from 'vue'
 import { http } from '@/composables/http'
 import ButtonComponent from '@/components/elements/Button.vue'
 import { useAppState } from '@/composables/appState'
+import { useI18n } from 'vue-i18n'
 
+const i18n = useI18n()
 const loading = ref(false)
 const errorMessage = ref('')
 
@@ -45,7 +47,7 @@ const open = async () => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       loading.value = false
-      errorMessage.value = error.response?.data.error
+      errorMessage.value = error.response?.data.error === 'not_allow_signup_account' ? i18n.t('cloud.notAllow') : error.response?.data.error
     }
   }
 }
