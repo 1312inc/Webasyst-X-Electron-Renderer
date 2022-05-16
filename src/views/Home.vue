@@ -18,7 +18,9 @@
           </div>
           <div v-if="user" class="flex flex-col space-y-2">
             <div class="flex justify-center">
-              <img :src="user.userpic" class="w-10 rounded-full" />
+              <a @click.prevent="useAppState.openExternalLink('https://www.webasyst.com/my/profile/')" href="#">
+                <img :src="user.userpic" class="w-10 rounded-full" />
+              </a>
             </div>
             <div class="flex justify-center opacity-60">
               <a href="#" @click.prevent="useAppState.logout" class="text-xs">{{
