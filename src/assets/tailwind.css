@@ -4,6 +4,20 @@
 
 @tailwind utilities;
 
+html {
+  --background-color-blank:                 #fff;
+  --text-color:                             #444;
+  --border-color-input:                     rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  html {
+    --background-color-blank:                 #131224;
+    --text-color:                             #99a;
+    --border-color-input:                     rgba(255, 255, 255, 0.2);
+  }
+}
+
 .list-item {
   transition: all .3s;
 }

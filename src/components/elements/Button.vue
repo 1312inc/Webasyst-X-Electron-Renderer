@@ -51,7 +51,10 @@ button {
   @apply inline-flex items-center font-semibold leading-6 text-sm bg-blue-600 text-white px-6 py-2 rounded-xl transition-opacity hover:opacity-80;
 
   &.outlined {
-    @apply bg-white text-gray-700 border-2;
+    @apply border-2;
+    border-color: var(--border-color-input);
+    background-color: var(--background-color-blank);
+    color: var(--text-color);
   }
 }
 </style>
