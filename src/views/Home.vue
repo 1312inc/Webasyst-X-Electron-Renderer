@@ -121,8 +121,8 @@ watch(
               `${v.url}/api.php/token-headless`,
               {
                 code: authCodes[v.id],
-                scope: 'cash,webasyst,installer',
-                client_id: 'WebasystDesktopApp'
+                scope: useAppState.SETTINGS.API_SCOPE,
+                client_id: useAppState.SETTINGS.API_CLIENT_ID
               }
         )
         const { data: info } = await http(token.access_token).get(

@@ -8,7 +8,7 @@
     </div>
     <div class="flex justify-center items-center space-x-4">
       <div>
-        <img src="cash.png" class="w-24" alt="" />
+        <img src="app.png" class="w-24" alt="" />
       </div>
       <div>
         <svg

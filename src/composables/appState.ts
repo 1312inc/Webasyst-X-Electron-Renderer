@@ -3,6 +3,8 @@ import { Installation } from '../types/models'
 const appState = (window as any).appState
 
 const useAppState = {
+  SETTINGS: appState.SETTINGS,
+
   openExternalLink (url: string): void {
     appState.openExternalLink(url)
   },
