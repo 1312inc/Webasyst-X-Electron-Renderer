@@ -16,10 +16,9 @@
               />
             </transition-group>
             <div
-              @click.prevent="$router.replace({name: 'Cloud'})"
-              class="cursor-pointer text-6xl text-center opacity-60"
+              class="flex justify-center opacity-60"
             >
-              +
+              <img @click.prevent="$router.replace({name: 'Cloud'})" class="cursor-pointer" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE2IDd2MThNNyAxNmgxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMnB4IiBjbGFzcz0ic3Ryb2tlLTAwMDAwMCI+PC9wYXRoPjwvc3ZnPg==" width="40" alt="">
             </div>
           </div>
           <div v-if="user" class="flex flex-col space-y-2">
