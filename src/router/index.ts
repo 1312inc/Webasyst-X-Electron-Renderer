@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { useAppState } from '@/composables/appState'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import Demo from '../views/Demo.vue'
 import PageCreateCloud from '../components/pages/PageCreateCloud.vue'
 import PageInstallation from '../components/pages/PageInstallation.vue'
 import PageInstallCashApp from '../components/pages/PageInstallCashApp.vue'
@@ -36,6 +37,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/demo',
+    name: 'Demo',
+    component: Demo
   }
 ]
 

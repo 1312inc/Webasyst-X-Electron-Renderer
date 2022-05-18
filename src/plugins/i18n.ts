@@ -30,6 +30,10 @@ const messages = {
         402: 'The app license is required',
         409: 'The Webasyst account server does not meet the app system requirements'
       }
+    },
+    demo: {
+      link: 'View demo account',
+      exit: 'Exit demo'
     }
   },
   ru: {
@@ -59,6 +63,10 @@ const messages = {
         402: 'Установка приложения требует лицензии',
         409: 'Сервер аккаунта Webasyst не соответствует системным требованиям приложения'
       }
+    },
+    demo: {
+      link: 'Демо аккаунт',
+      exit: 'Выйти из демо'
     }
   }
 }

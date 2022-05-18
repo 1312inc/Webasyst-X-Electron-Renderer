@@ -8,7 +8,7 @@
         class="max-w-sm text-sm mx-auto opacity-50"
       ></div>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center mb-8">
       <button-component
         @click.prevent="useAppState.login"
         :text="$t('signInButton')"
@@ -16,6 +16,11 @@
       >
         <img src="webasystIcon.svg" alt="" class="w-6 mr-3" />
       </button-component>
+    </div>
+    <div class="flex justify-center">
+      <router-link to="demo" class="text-sm">
+        {{ $t('demo.link') }}
+      </router-link>
     </div>
     <a
       @click.prevent="
