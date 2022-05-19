@@ -18,7 +18,7 @@
       </button-component>
     </div>
     <div class="flex justify-center">
-      <router-link to="demo" class="text-sm">
+      <router-link to="demo" class="link text-sm">
         {{ $t('demo.link') }}
       </router-link>
     </div>

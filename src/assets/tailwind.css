@@ -8,6 +8,8 @@ html {
   --background-color-blank:                 #fff;
   --text-color:                             #444;
   --border-color-input:                     rgba(0, 0, 0, 0.1);
+  --accent-color:                           #1a9afe;
+  --accent-color-hover:                     #05e;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -15,7 +17,17 @@ html {
     --background-color-blank:                 #131224;
     --text-color:                             #99a;
     --border-color-input:                     rgba(255, 255, 255, 0.2);
+    --accent-color:                           #0075cb;
+    --accent-color-hover:                     #006edd;
   }
+}
+
+a.link {
+  color: var(--accent-color);
+}
+
+a.link:hover {
+  color: var(--accent-color-hover);
 }
 
 .list-item {

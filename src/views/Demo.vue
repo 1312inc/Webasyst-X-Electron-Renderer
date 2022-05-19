@@ -10,7 +10,7 @@
                             </router-link>
                         </div>
                         <div class="flex justify-center opacity-60">
-                            <router-link to="login" class="text-xs text-white">
+                            <router-link to="login" class="text-xs text-center text-white">
                                 {{ $t('demo.exit') }}
                             </router-link>
                         </div>
