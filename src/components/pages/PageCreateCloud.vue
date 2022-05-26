@@ -47,9 +47,8 @@ const open = async () => {
     useAppState.reload()
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // TODO: handle already_exists error
       loading.value = false
-      errorMessage.value = error.response?.data.error === 'not_allow_signup_account' ? i18n.t('cloud.notAllow') : error.response?.data.error
+      errorMessage.value = error.response?.data.error ? i18n.t(`errors.cloud.${error.response.data.error}`) : 'error'
     }
   }
 }
