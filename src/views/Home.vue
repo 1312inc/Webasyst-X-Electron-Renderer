@@ -1,7 +1,10 @@
 <template>
   <div class="flex w-full">
     <div class="w-20 flex h-screen">
-      <div class="w-20 bg-green dark:bg-greenDark pt-4 pb-4">
+      <div
+        :style="useAppState.SETTINGS.SIDEBAR_BACKGROUND_COLOR && `background-color:${useAppState.SETTINGS.SIDEBAR_BACKGROUND_COLOR}`"
+        class="w-20 bg-green dark:bg-greenDark pt-4 pb-4"
+      >
         <div class="h-full flex flex-col space-y-4 text-white">
           <div class="h-4"></div>
           <div class="flex flex-grow overflow-y-auto flex-col space-y-4 pt-1">

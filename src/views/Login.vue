@@ -2,7 +2,7 @@
   <div class="w-screen h-screen flex flex-col justify-center">
     <div class="text-center mb-8">
       <img src="app.png" alt="" class="w-24 mx-auto mb-4" />
-      <div class="text-3xl mb-4 font-medium">{{ $t("appName") }}</div>
+      <div class="text-3xl mb-4 font-medium">{{ useAppState.SETTINGS.APP_NAME }}</div>
       <div
         v-html="$t('signInMessage')"
         class="max-w-sm text-sm mx-auto opacity-50"
@@ -17,11 +17,11 @@
         <img src="webasystIcon.svg" alt="" class="w-6 mr-3" />
       </button-component>
     </div>
-    <div class="flex justify-center">
+    <!-- <div class="flex justify-center">
       <router-link to="demo" class="link text-sm">
         {{ $t('demo.link') }}
       </router-link>
-    </div>
+    </div> -->
     <a
       @click.prevent="
         useAppState.openExternalLink(
