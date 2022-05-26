@@ -1,16 +1,15 @@
 import { createI18n } from 'vue-i18n'
-import { useAppState } from '@/composables/appState'
 
 const messages = {
   en: {
-    appName: 'Webasyst Cash Flow',
+    appName: 'Webasyst X',
     signInButton: 'Sign in with Webasyst ID',
-    signInMessage: 'Manage your business cash flow wisely. Know how much money you’ll have on your business account tomorrow, in a week, in a month, and a year. Avoid cash gaps. Forecast the financial future of your business.',
+    signInMessage: 'To make this screen look great, simply replace the app icon and the app name above with your project credentials, and add an encouraging welcome message.',
     logout: 'Log out',
     cloud: {
       title: 'New Webasyst account',
       button: 'Create Webasyst Account',
-      desc: 'A new Webasyst Cloud account will be automatically created with Cash, Team, Installer and other awesome apps pre-installed. This will be an account for your entire team.',
+      desc: 'A new Webasyst Cloud account will be automatically created with awesome apps pre-installed. This will be an account for your entire team.',
       notAllow: 'Sorry, we cannot create another account for you at the moment. Most likely, a limit on the number of free Webasyst cloud accounts has been exceeded.',
       loading: 'Creating an account...'
 
@@ -37,14 +36,14 @@ const messages = {
     }
   },
   ru: {
-    appName: 'Webasyst Деньги',
+    appName: 'Webasyst X',
     signInButton: 'Войти с Webasyst ID',
-    signInMessage: 'Знайте с точностью до рубля, сколько денег будет на счете через месяц, через полгода, через год. Прогнозируйте финансовое будущее бизнеса. Избегайте кассовых разрывов.',
+    signInMessage: 'Чтобы эта страница была не такой скучной, подставьте иконку и название своего приложения и напишите какой-нибудь классный приветственный текст.',
     logout: 'Выйти',
     cloud: {
       title: 'Новый аккаунт Webasyst',
       button: 'Создать аккаунт Webasyst',
-      desc: 'В облаке Webasyst будет развернут новый аккаунт с предустановленными приложениями «Деньги», «Команда», «Инсталлер». Вы сможете приглашать своих коллег в этот аккаунт для совместной работы.',
+      desc: 'В облаке Webasyst будет развернут новый аккаунт с предустановленными приложениями. Вы сможете приглашать своих коллег в этот аккаунт для совместной работы.',
       notAllow: 'Не удалось создать аккаунт Webasyst. Скорее всего, превышен лимит на количество бесплатных облачных аккаунтов.',
       loading: 'Создаю новый аккаунт...'
     },

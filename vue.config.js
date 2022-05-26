@@ -1,5 +1,6 @@
 module.exports = {
   publicPath: '',
+  productionSourceMap: false,
   filenameHashing: false,
   chainWebpack: config => {
     config.optimization.delete('splitChunks')
