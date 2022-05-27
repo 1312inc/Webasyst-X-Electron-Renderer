@@ -2,11 +2,12 @@
   <div class="w-screen h-screen flex flex-col justify-center">
     <div class="text-center mb-8">
       <img src="app.png" alt="" class="w-24 mx-auto mb-4" />
-      <div class="text-3xl mb-4 font-medium">{{ useAppState.SETTINGS.APP_NAME }}</div>
-      <div
-        v-html="$t('signInMessage')"
-        class="max-w-sm text-sm mx-auto opacity-50"
-      ></div>
+      <div class="text-3xl mb-4 font-medium">
+        {{ useAppState.SETTINGS.APP_NAME }}
+      </div>
+      <div class="max-w-sm text-sm mx-auto opacity-50">
+        {{ useAppState.SETTINGS.APP_DESCRIPTION }}
+      </div>
     </div>
     <div class="flex justify-center mb-8">
       <button-component

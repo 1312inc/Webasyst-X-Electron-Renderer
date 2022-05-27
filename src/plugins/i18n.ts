@@ -4,7 +4,6 @@ const messages = {
   en: {
     appName: 'Webasyst X',
     signInButton: 'Sign in with Webasyst ID',
-    signInMessage: 'To make this screen look great, simply replace the app icon and the app name above with your project credentials, and add an encouraging welcome message.',
     logout: 'Log out',
     cloud: {
       title: 'New Webasyst account',
@@ -40,7 +39,6 @@ const messages = {
   ru: {
     appName: 'Webasyst X',
     signInButton: 'Войти с Webasyst ID',
-    signInMessage: 'Чтобы эта страница была не такой скучной, подставьте иконку и название своего приложения и напишите какой-нибудь классный приветственный текст.',
     logout: 'Выйти',
     cloud: {
       title: 'Новый аккаунт Webasyst',
