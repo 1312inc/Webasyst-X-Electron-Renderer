@@ -3,10 +3,10 @@
     <div class="text-center mb-8">
       <img src="app.png" alt="" class="w-24 mx-auto mb-4" />
       <div class="text-3xl mb-4 font-medium">
-        {{ useAppState.SETTINGS.APP_NAME }}
+        {{ $t('appName') }}
       </div>
       <div class="max-w-sm text-sm mx-auto opacity-50">
-        {{ useAppState.SETTINGS.APP_DESCRIPTION }}
+        {{ $t('appDescription') }}
       </div>
     </div>
     <div class="flex justify-center mb-8">
